@@ -18,6 +18,7 @@ import com.demo.DTO.UserRegistrationDTO;
 import com.demo.models.ERole;
 import com.demo.models.Role;
 import com.demo.models.User;
+import com.demo.repository.RoleRepository;
 import com.demo.repository.UserRepository;
 import com.demo.service.UserService;
 
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleService roleService;
 	
 	@Override
 	public User save(UserRegistrationDTO registrationDTO) {
@@ -73,13 +77,27 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User editUser(Long id, User user) {
-		return null;
+		User userInDB = userRepository.findById(id).get();
+		Role role = roleService.getRoleByName(user.getRole().getName());
+		
+		userInDB.setEmail(user.getEmail());
+		userInDB.setUsername(user.getUsername());
+		userInDB.setRole(role);
+		return userRepository.save(userInDB);
 	}
 
 	
 	@Override
 	public void deleteUser(User user) {
 		userRepository.delete(user);
+	}
+
+	
+	@Override
+	public User createUser(User user) {
+		Role role = roleService.getRoleByName(user.getRole().getName());
+		user.setRole(role);
+		return userRepository.save(user);
 	}
 
 }

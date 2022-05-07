@@ -210,58 +210,59 @@
 				</div>
 				<!-- /.container-fluid -->
 			</div>
+			<section class="content">
+				<div class="card card-info">
+					<div class="card-header">
+						<h3 class="card-title">Product infomation</h3>
+					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form
+						th:action="@{/admin/products/edit-product/{id}(id=${productDTO.id})}"
+						method="post" th:object="${productDTO}">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="">Product name</label> <input th:field="*{name}"
+									type="text" class="form-control" id=""
+									placeholder="Enter product name">
+							</div>
+							<div class="form-group">
+								<label>Category</label> <select th:field="*{categoryDTO.id}"
+									class="form-control">
+									<option th:each="categoryDTO : ${categoryDTOs}"
+										th:value="${categoryDTO.id}" th:text="${categoryDTO.name}"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="">Quantity</label> <input th:field="*{quantity}"
+									type="number" class="form-control" id=""
+									placeholder="Enter category quantity">
+							</div>
+							<div class="form-group">
+								<label for="">Price</label> <input th:field="*{price}"
+									type="number" class="form-control" id=""
+									placeholder="Enter category price">
+							</div>
+							<div class="form-group">
+								<label for="">Description</label> <input
+									th:field="*{description}" type="text" class="form-control"
+									id="" placeholder="Enter category description">
+							</div>
+							<div class="form-group">
+								<label for="">Picture</label> <input th:field="*{picture}"
+									type="text" class="form-control" id=""
+									placeholder="Enter category picture link">
+							</div>
 
-			<div class="card card-info">
-				<div class="card-header">
-					<h3 class="card-title">Product infomation</h3>
+						</div>
+						<!-- /.card-body -->
+
+						<div class="card-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
 				</div>
-				<!-- /.card-header -->
-				<!-- form start -->
-				<form th:action="@{/admin/products/edit-product/{id}(id=${productDTO.id})}" method="post"
-					th:object="${productDTO}">
-					<div class="card-body">
-						<div class="form-group">
-							<label for="">Product name</label> <input th:field="*{name}"
-								type="text" class="form-control" id=""
-								placeholder="Enter product name">
-						</div>
-						<div class="form-group">
-							<label>Category</label> <select th:field="*{categoryDTO.id}"
-								class="form-control">
-								<option th:each="categoryDTO : ${categoryDTOs}"
-									th:value="${categoryDTO.id}" th:text="${categoryDTO.name}"></option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="">Quantity</label> <input th:field="*{quantity}"
-								type="number" class="form-control" id=""
-								placeholder="Enter category quantity">
-						</div>
-						<div class="form-group">
-							<label for="">Price</label> <input th:field="*{price}"
-								type="number" class="form-control" id=""
-								placeholder="Enter category price">
-						</div>
-						<div class="form-group">
-							<label for="">Description</label> <input
-								th:field="*{description}" type="text" class="form-control" id=""
-								placeholder="Enter category description">
-						</div>
-						<div class="form-group">
-							<label for="">Picture</label> <input th:field="*{picture}"
-								type="text" class="form-control" id=""
-								placeholder="Enter category picture link">
-						</div>
-
-					</div>
-					<!-- /.card-body -->
-
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				</form>
-			</div>
-
+			</section>
 
 		</div>
 		<!-- /.content-wrapper -->

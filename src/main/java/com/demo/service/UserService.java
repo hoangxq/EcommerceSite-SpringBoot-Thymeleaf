@@ -11,6 +11,8 @@ public interface UserService extends UserDetailsService{
 
 	User save(UserRegistrationDTO registrationDTO);
 	
+	User createUser(User user);
+	
 	User getUserById (Long id);
 	
 	List<User> getAllUser ();

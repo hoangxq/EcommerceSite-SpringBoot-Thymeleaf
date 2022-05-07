@@ -210,57 +210,58 @@
 				</div>
 				<!-- /.container-fluid -->
 			</div>
+			<section class="content">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">List All Product</h3>
 
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">List All Product</h3>
+								&nbsp &nbsp &nbsp &nbsp <a class="btn btn-info"
+									th:href="@{/admin/products/add-product}">Add</a>
 
-							&nbsp &nbsp &nbsp &nbsp <a class="btn btn-info"
-								th:href="@{/admin/products/add-product}">Add</a>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body table-responsive p-0">
+								<table class="table table-bordered table-hover text-nowrap">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Name</th>
+											<th>Category</th>
+											<th>Quantity</th>
+											<th>Price</th>
+											<th>Description</th>
+											<th>Picture</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="productDTO : ${productDTOs}">
+											<td th:text="${productDTO.id}"></td>
+											<td th:text="${productDTO.name}"></td>
+											<td th:text="${productDTO.categoryDTO.name}"></td>
+											<td th:text="${productDTO.quantity}"></td>
+											<td
+												th:text="${#numbers.formatDecimal(productDTO.price, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
+											<td th:text="${productDTO.description}"></td>
+											<td th:text="${productDTO.picture}"></td>
+											<td><a class="btn btn-info"
+												th:href="@{/admin/products/edit-product/{id}(id=${productDTO.id})}">Edit</a>
+												<a class="btn btn-danger"
+												th:href="@{/admin/products/delete-product/{id}(id=${productDTO.id})}">Delete</a>
+											</td>
+										</tr>
 
+									</tbody>
+								</table>
+							</div>
+							<!-- /.card-body -->
 						</div>
-						<!-- /.card-header -->
-						<div class="card-body table-responsive p-0">
-							<table class="table table-bordered table-hover text-nowrap">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Name</th>
-										<th>Category</th>
-										<th>Quantity</th>
-										<th>Price</th>
-										<th>Description</th>
-										<th>Picture</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="productDTO : ${productDTOs}">
-										<td th:text="${productDTO.id}"></td>
-										<td th:text="${productDTO.name}"></td>
-										<td th:text="${productDTO.categoryDTO.name}"></td>
-										<td th:text="${productDTO.quantity}"></td>
-										<td th:text="${#numbers.formatDecimal(productDTO.price, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
-										<td th:text="${productDTO.description}"></td>
-										<td th:text="${productDTO.picture}"></td>
-										<td><a class="btn btn-info"
-											th:href="@{/admin/products/edit-product/{id}(id=${productDTO.id})}">Edit</a>
-											<a class="btn btn-danger"
-											th:href="@{/admin/products/delete-product/{id}(id=${productDTO.id})}">Delete</a>
-										</td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-						<!-- /.card-body -->
+						<!-- /.card -->
 					</div>
-					<!-- /.card -->
 				</div>
-			</div>
-
+			</section>
 		</div>
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">

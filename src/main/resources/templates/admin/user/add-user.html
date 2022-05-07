@@ -65,8 +65,7 @@
 		<!-- Main Sidebar Container -->
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
-			<a th:href="@{/admin}" class="brand-link"> 
-			<img
+			<a th:href="@{/admin}" class="brand-link"> <img
 				src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
 				class="brand-image img-circle elevation-3" style="opacity: .8">
 				<span class="brand-text font-weight-light">Admin</span>
@@ -81,7 +80,8 @@
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a th:href="@{/admin/profile/{id}}" class="d-block">Alexander Pierce</a>
+						<a th:href="@{/admin/profile/{id}}" class="d-block">Alexander
+							Pierce</a>
 					</div>
 				</div>
 
@@ -210,7 +210,51 @@
 				</div>
 				<!-- /.container-fluid -->
 			</div>
+			<section class="content">
+				<div class="card card-success">
+					<div class="card-header">
+						<h3 class="card-title">User information</h3>
+					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form th:action="@{/admin/users/add-user}" method="post"
+						th:object="${userDTO}">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Username</label> <input
+									type="text" class="form-control" name="username"
+									th:field="*{username}" placeholder="Enter username">
+							</div>
 
+							<div class="form-group">
+								<label for="exampleInputEmail1">Password</label> <input
+									type="password" class="form-control" name="username"
+									th:field="*{password}" placeholder="Enter password">
+							</div>
+
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email</label> <input
+									type="email" class="form-control" name="email"
+									th:field="*{email}" placeholder="Enter email">
+							</div>
+
+							<div class="form-group">
+								<label>Role</label> <select th:field="*{roleDTO.name}"
+									class="form-control">
+									<option th:value="ROLE_ADMIN" th:text="ADMIN"></option>
+									<option th:value="ROLE_USER" th:text="USER"></option>
+								</select>
+							</div>
+
+						</div>
+						<!-- /.card-body -->
+
+						<div class="card-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</section>
 		</div>
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">

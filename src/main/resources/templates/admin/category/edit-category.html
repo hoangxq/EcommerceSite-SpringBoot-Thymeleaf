@@ -211,36 +211,37 @@
 				<!-- /.container-fluid -->
 			</div>
 
+			<section class="content">
+				<div class="card card-info">
+					<div class="card-header">
+						<h3 class="card-title">Category infomation</h3>
+					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form
+						th:action="@{/admin/categories/edit-category/{id}(id=${categoryDTO.id})}"
+						method="post" th:object="${categoryDTO}">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="">Category name</label> <input th:field="*{name}"
+									type="text" class="form-control" id=""
+									placeholder="Enter category name">
+							</div>
+							<div class="form-group">
+								<label for="">Description</label> <input
+									th:field="*{description}" type="text" class="form-control"
+									id="" placeholder="Enter category description">
+							</div>
 
-			<div class="card card-info">
-				<div class="card-header">
-					<h3 class="card-title">Category infomation</h3>
+						</div>
+						<!-- /.card-body -->
+
+						<div class="card-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
 				</div>
-				<!-- /.card-header -->
-				<!-- form start -->
-				<form th:action="@{/admin/categories/edit-category/{id}(id=${categoryDTO.id})}" method="post"
-					th:object="${categoryDTO}">
-					<div class="card-body">
-						<div class="form-group">
-							<label for="">Category name</label> <input th:field="*{name}"
-								type="text" class="form-control" id=""
-								placeholder="Enter category name">
-						</div>
-						<div class="form-group">
-							<label for="">Description</label> <input
-								th:field="*{description}" type="text" class="form-control" id=""
-								placeholder="Enter category description">
-						</div>
-
-					</div>
-					<!-- /.card-body -->
-
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				</form>
-			</div>
-
+			</section>
 		</div>
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">
