@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.demo.DTO.UserDTO;
 import com.demo.DTO.UserRegistrationDTO;
 import com.demo.models.User;
 import com.demo.service.UserService;
@@ -38,9 +39,9 @@ public class AdminController {
 	
 	@PostMapping("/register")
 	public String adminRegisterPost(@ModelAttribute(name = "user") 
-		UserRegistrationDTO registrationDTO) {
+		UserDTO userDTO) {
 		
-		userService.save(registrationDTO);
+		userService.createUser(userDTO.toModel());
 		return "redirect:/admin/register";
 	}
 	

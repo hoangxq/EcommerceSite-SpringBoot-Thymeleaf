@@ -18,6 +18,7 @@ import com.demo.models.ERole;
 import com.demo.models.Role;
 import com.demo.models.User;
 import com.demo.service.impl.RoleService;
+import com.demo.service.CartService;
 import com.demo.service.UserService;
 
 @Controller
@@ -55,7 +56,7 @@ public class UserController {
 	public String addNewUserPost(Model model, @ModelAttribute(name = "userDTO") UserDTO userDTO) {
 
 		userService.createUser(userDTO.toModel());
-
+		
 		return "redirect:/admin/users";
 	}
 

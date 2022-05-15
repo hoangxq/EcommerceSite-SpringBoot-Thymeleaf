@@ -9,7 +9,7 @@ import com.demo.models.User;
 
 public interface UserService extends UserDetailsService{
 
-	User save(UserRegistrationDTO registrationDTO);
+	//User save(UserRegistrationDTO registrationDTO);
 	
 	User createUser(User user);
 	

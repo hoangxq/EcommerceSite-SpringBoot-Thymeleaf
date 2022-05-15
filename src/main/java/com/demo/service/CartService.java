@@ -3,6 +3,7 @@ package com.demo.service;
 import java.util.List;
 
 import com.demo.models.Cart;
+import com.demo.models.User;
 
 public interface CartService {
 
@@ -10,10 +11,10 @@ public interface CartService {
 	
 	Cart getCartById(Long id);
 	
+	Cart getCartByUser(User user);
+	
 	Cart createCart (Cart Cart);
 	
-	Cart editCart (Cart Cart, Long id);
-	
-	void deleteCart (Cart Cart);
+	void deleteCart (Cart cart);
 	
 }
