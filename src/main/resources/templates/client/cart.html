@@ -103,69 +103,87 @@
     <!-- Header End -->
 </header>
 <main>
-    <section class="popular-items">
-        <div class="hero-cap text-center">
-            <h2 th:if="${session.username == null}" style="margin : 40px auto;">WELCOME TO OUR SHOP</h2>
-            <h2 th:if="${session.username != null}" th:text="'WELCOME BACK ' +  ${session.username}"
-                style="margin : 40px auto;"></h2>
-        </div>
+
+    <div class="hero-cap text-center">
+        <h2 th:if="${session.username == null}" style="margin : 40px auto;">WELCOME TO OUR SHOP</h2>
+        <h2 th:if="${session.username != null}" th:text="'WELCOME BACK ' +  ${session.username}"
+            style="margin : 40px auto;"></h2>
+    </div>
+
+    <section class="cart_area" style="margin : 40px auto;" >
         <div class="container">
-            <div class="row product-btn justify-content-between mb-40">
-                <div class="properties__button">
-                    <!--Nav Button  -->
-
-                    <!--End Nav Button  -->
-                </div>
-                <!-- Grid and List view -->
-                <div class="grid-list-view"></div>
-                <!-- Select items -->
-                <div class="select-this">
-
-                </div>
-            </div>
-            <!-- Nav Card -->
-            <div class="tab-content" id="nav-tabContent">
-                <!-- card one -->
-                <div class="tab-pane fade show active" id="nav-home"
-                     role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="row">
-                        <div th:each="productDTO : ${productDTOs}" class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                    <img th:src="${productDTO.picture}" alt="">
-                                    <a th:if="${session.username == null}" th:href="@{/login}">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </a>
-                                    <a th:if="${session.username != null}" th:href="@{/my-cart}">
-                                        <div class="img-cap">
-                                            <span>Add to cart</span>
-                                        </div>
-                                    </a>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cartItemDTO : ${cartItemDTOs}">
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img th:src="${cartItemDTO.productDTO.picture}" alt=""/>
+                                    </div>
+                                    <div class="media-body">
+                                        <p th:text="${cartItemDTO.productDTO.name}"></p>
                                     </div>
                                 </div>
-                                <div class="popular-caption">
-                                    <h3>
-                                        <a th:href="@{/product-detail/{id}(id=${productDTO.id})}"
-                                           th:text="${productDTO.name}"></a>
-                                    </h3>
-                                    <span th:text="${#numbers.formatDecimal(productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></span>
+                            </td>
+                            <td>
+                                <h5 th:text="${#numbers.formatDecimal(cartItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+                            </td>
+                            <td>
+                                <div class="product_count">
+                                    <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                                    <input class="input-number" type="text" th:value="${cartItemDTO.quantity}" min="0" max="10">
+                                    <span class="input-number-increment"> <i class="ti-plus"></i></span>
                                 </div>
-                            </div>
-                        </div>
+                            </td>
+                            <td>
+                                <h5 th:text="${#numbers.formatDecimal(cartItemDTO.quantity * cartItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+                            </td>
+                        </tr>
 
+                        <tr class="bottom_button">
+                            <td>
+                                <a class="btn_1" href="#">Update Cart</a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="cupon_text float-right">
+                                    <a class="btn_1" href="#">Close Coupon</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <h5>Subtotal</h5>
+                            </td>
+                            <td>
+                                <h5>$2160.00</h5>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="checkout_btn_inner float-right">
+                        <a class="btn_1" th:href="@{/}">Continue Shopping</a>
+                        <a class="btn_1 checkout_btn_1" th:href="@{/checkout}">Proceed to checkout</a>
                     </div>
                 </div>
-
             </div>
-            <!-- End Nav Card -->
-        </div>
     </section>
-    <!-- Latest Products End -->
-    <!--? Shop Method Start-->
+
+
     <div class="shop-method-area">
         <div class="container">
             <div class="method-wrapper">

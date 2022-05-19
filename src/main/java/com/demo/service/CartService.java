@@ -12,6 +12,8 @@ public interface CartService {
 	Cart getCartById(Long id);
 	
 	Cart getCartByUser(User user);
+
+	//Cart getCartByUsername(String username);
 	
 	Cart createCart (Cart Cart);
 	

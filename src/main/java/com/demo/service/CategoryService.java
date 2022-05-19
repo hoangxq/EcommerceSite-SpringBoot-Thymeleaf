@@ -9,6 +9,8 @@ public interface CategoryService {
 	List<Category> getAllCategory ();
 	
 	Category getCategoryById(Long id);
+
+	Category getCategoryByName(String name);
 	
 	Category createCategory (Category category);
 	

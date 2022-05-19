@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.demo.DTO.RoleDTO;
 import com.demo.DTO.UserDTO;
 import com.demo.DTO.UserRegistrationDTO;
+import com.demo.models.ERole;
+import com.demo.models.Role;
 import com.demo.models.User;
 import com.demo.service.UserService;
 
@@ -33,7 +36,7 @@ public class AdminController {
 	
 	@GetMapping("/register")
 	public String adminRegisterGet(Model model) {
-		model.addAttribute("user", new UserRegistrationDTO());
+		model.addAttribute("user", new UserDTO());
 		return "admin/register";
 	}
 	
@@ -41,6 +44,7 @@ public class AdminController {
 	public String adminRegisterPost(@ModelAttribute(name = "user") 
 		UserDTO userDTO) {
 		
+		userDTO.setRoleDTO((new Role(ERole.ROLE_ADMIN)).toDTO());
 		userService.createUser(userDTO.toModel());
 		return "redirect:/admin/register";
 	}

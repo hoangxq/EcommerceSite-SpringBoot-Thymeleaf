@@ -245,7 +245,8 @@
 											<td
 												th:text="${#numbers.formatDecimal(productDTO.price, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
 											<td th:text="${productDTO.description}"></td>
-											<td th:text="${productDTO.picture}"></td>
+											<td th:if="${productDTO.picture.length()!=0}" th:text="${productDTO.picture.substring(0, 20)} + '....'"></td>
+
 											<td><a class="btn btn-info"
 												th:href="@{/admin/products/edit-product/{id}(id=${productDTO.id})}">Edit</a>
 												<a class="btn btn-danger"
