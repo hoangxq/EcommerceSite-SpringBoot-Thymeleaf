@@ -22,7 +22,7 @@ public class OrderDTO {
 	private String receiverAddress;
 	private String receiverPhone;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date timeOrder;
 
 	public Order toModel () {

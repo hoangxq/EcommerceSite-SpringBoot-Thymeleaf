@@ -57,6 +57,8 @@
 				<li class="nav-item d-none d-sm-inline-block"><a
 					href="https://www.facebook.com/hoangxq2k1" class="nav-link">Contact</a>
 				</li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					th:href="@{/admin/logout}" class="nav-link">Logout</a></li>
 			</ul>
 
 		</nav>
@@ -80,8 +82,8 @@
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a th:href="@{/admin/profile/{id}}" class="d-block">Alexander
-							Pierce</a>
+						<a href="#"
+							sec:authentication="principal.username" class="d-block"></a>
 					</div>
 				</div>
 

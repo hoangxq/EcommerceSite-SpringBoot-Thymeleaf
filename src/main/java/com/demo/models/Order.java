@@ -36,7 +36,7 @@ public class Order {
 	@Column(name = "receiver_phone")
 	private String receiverPhone;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "time_order")
 	private Date timeOrder;
 

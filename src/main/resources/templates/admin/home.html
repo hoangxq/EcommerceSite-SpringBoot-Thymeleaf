@@ -1,9 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="en" 
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,6 +58,8 @@
 				<li class="nav-item d-none d-sm-inline-block"><a
 					href="https://www.facebook.com/hoangxq2k1" class="nav-link">Contact</a>
 				</li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					th:href="@{/admin/logout}" class="nav-link">Logout</a></li>
 			</ul>
 
 		</nav>
@@ -68,8 +68,7 @@
 		<!-- Main Sidebar Container -->
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
-			<a th:href="@{/admin}" class="brand-link"> 
-			<img
+			<a th:href="@{/admin}" class="brand-link"> <img
 				src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
 				class="brand-image img-circle elevation-3" style="opacity: .8">
 				<span class="brand-text font-weight-light">Admin</span>
@@ -84,7 +83,8 @@
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a th:href="@{/admin/profile/{id}}" sec:authentication="principal.username" class="d-block"></a>
+						<a href="#"
+							sec:authentication="principal.username" class="d-block"></a>
 					</div>
 				</div>
 
@@ -213,8 +213,79 @@
 				</div>
 				<!-- /.container-fluid -->
 			</div>
+			<section class="content">
+				<div class="row">
+					<div class="col-lg-3 col-6">
+						<!-- small box -->
+						<div class="small-box bg-info">
+							<div class="inner">
+								<h3>150</h3>
 
+								<p>Products</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-bag"></i>
+							</div>
+							<a th:href="@{/admin/products}" class="small-box-footer">More info <i
+								class="fas fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-6">
+						<!-- small box -->
+						<div class="small-box bg-success">
+							<div class="inner">
+								<h3>
+									53<sup style="font-size: 20px">%</sup>
+								</h3>
+
+								<p>Carts</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-stats-bars"></i>
+							</div>
+							<a th:href="@{/admin/carts}" class="small-box-footer">More info <i
+								class="fas fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-6">
+						<!-- small box -->
+						<div class="small-box bg-warning">
+							<div class="inner">
+								<h3>44</h3>
+
+								<p>Users</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-person-add"></i>
+							</div>
+							<a th:href="@{/admin/users}" class="small-box-footer">More info <i
+								class="fas fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-6">
+						<!-- small box -->
+						<div class="small-box bg-danger">
+							<div class="inner">
+								<h3>65</h3>
+
+								<p>Orders</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-pie-graph"></i>
+							</div>
+							<a th:href="@{/admin/orders}" class="small-box-footer">More info <i
+								class="fas fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+				</div>
+
+			</section>
 		</div>
+		
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">
 			<strong>Made by &nbsp <a href="https://fb.com/hoangxq2k1">Nguyen

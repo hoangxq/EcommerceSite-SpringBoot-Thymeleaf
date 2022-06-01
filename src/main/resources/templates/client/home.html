@@ -109,6 +109,7 @@
             <h2 th:if="${session.username != null}" th:text="'WELCOME BACK ' +  ${session.username}"
                 style="margin : 40px auto;"></h2>
         </div>
+        <div th:if="${categoryDTO != null}" class="hero-cap text-center"><h3 th:text="'List Product of ' + ${categoryDTO.name}"></h3></div>
         <div class="container">
             <div class="row product-btn justify-content-between mb-40">
                 <div class="properties__button">

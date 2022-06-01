@@ -82,6 +82,11 @@ public class HomeController {
 
 		User user = userService.getUserByEmail(userDTO.getEmail());
 
+		if (user == null){
+			model.addAttribute("error", "Username or password is invalid");
+			return "/client/login";
+		}
+
 		if (user.getRole().getName().equals(ERole.ROLE_USER) && new BCryptPasswordEncoder().matches(userDTO.getPassword(), user.getPassword())){
 			session.setAttribute("username", user.getUsername());
 			return "redirect:/";
