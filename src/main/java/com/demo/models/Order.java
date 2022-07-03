@@ -39,6 +39,9 @@ public class Order {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "time_order")
 	private Date timeOrder;
+	
+	@Column(name = "total_price")
+	private Double totalPrice;
 
 	public Order(User user, String receiverFullname, String receiverAddress, String receiverPhone, Date timeOrder) {
 		super();
@@ -51,6 +54,6 @@ public class Order {
 	
 	public OrderDTO toDTO () {
 		return new OrderDTO(id, user.toDTO(), receiverFullname
-				, receiverAddress, receiverPhone, timeOrder);
+				, receiverAddress, receiverPhone, timeOrder, totalPrice);
 	}
 }

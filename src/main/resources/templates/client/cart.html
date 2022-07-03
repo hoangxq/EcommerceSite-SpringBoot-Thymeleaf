@@ -1,340 +1,172 @@
 <!doctype html>
-<html class="no-js"
-      lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Shopping</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon"
-          href="/client/assets/img/favicon.ico">
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Shopping</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="site.webmanifest">
+<link rel="shortcut icon" type="image/x-icon"
+	href="/client/assets/img/favicon.ico">
 
-    <!-- CSS here -->
-    <link rel="stylesheet" href="/client/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/client/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/client/assets/css/flaticon.css">
-    <link rel="stylesheet" href="/client/assets/css/slicknav.css">
-    <link rel="stylesheet" href="/client/assets/css/animate.min.css">
-    <link rel="stylesheet" href="/client/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="/client/assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="/client/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="/client/assets/css/slick.css">
-    <link rel="stylesheet" href="/client/assets/css/nice-select.css">
-    <link rel="stylesheet" href="/client/assets/css/style.css">
+<!-- CSS here -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="/client/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/client/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/client/assets/css/flaticon.css">
+<link rel="stylesheet" href="/client/assets/css/slicknav.css">
+<link rel="stylesheet" href="/client/assets/css/animate.min.css">
+<link rel="stylesheet" href="/client/assets/css/magnific-popup.css">
+<link rel="stylesheet" href="/client/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/client/assets/css/themify-icons.css">
+<link rel="stylesheet" href="/client/assets/css/slick.css">
+<link rel="stylesheet" href="/client/assets/css/nice-select.css">
+<link rel="stylesheet" href="/client/assets/css/style.css">
 </head>
 
 <body>
-<!--? Preloader Start -->
-<div id="preloader-active">
-    <div
-            class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img src="/client/assets/img/logo/logo.png" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Preloader Start -->
-<header>
-    <!-- Header Start -->
-    <div class="header-area">
-        <div class="main-header header-sticky">
-            <div class="container-fluid">
-                <div class="menu-wrapper">
-                    <!-- Logo -->
-                    <div class="logo">
-                        <a th:href="@{/}"><img
-                                src="/client/assets/img/logo/logo.png" alt=""></a>
-                    </div>
-                    <!-- Main-menu -->
-                    <div class="main-menu d-none d-lg-block">
-                        <nav>
-                            <ul id="navigation">
-                                <li><a th:href="@{/}">Home</a></li>
-                                <li><a href="#">Category</a>
-                                    <ul class="submenu">
-                                        <li th:each="categoryDTO : ${categoryDTOs}"><a
-                                                th:href="@{/category/{name}(name=${categoryDTO.name})}"
-                                                th:text="${categoryDTO.name}"></a></li>
-                                    </ul>
-                                </li>
-                                <li th:if="${session.username != null}"><a th:href="@{/profile}">Profile</a></li>
-                                <li th:if="${session.username == null}"><a th:href="@{/login}">Profile</a></li>
-                                <li th:if="${session.username != null}"><a th:href="@{/my-cart}">My cart</a></li>
-                                <li th:if="${session.username == null}"><a th:href="@{/login}">My cart</a></li>
-                                <li th:if="${session.username != null}"><a th:href="@{/my-order}">My order</a></li>
-                                <li th:if="${session.username == null}"><a th:href="@{/login}">My order</a></li>
-                                <li><a th:href="@{/contact}">Contact</a></li>
-                                <li th:if="${session.username != null}"><a th:href="@{/logout}">Logout</a></li>
-                                <li th:if="${session.username == null}"><a th:href="@{/login}">Login</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <!-- Header Right -->
-                    <div class="header-right">
-                        <ul>
-                            <li>
-                                <div class="nav-search search-switch">
-                                    <span class="flaticon-search"></span>
-                                </div>
-                            </li>
-                            <li th:if="${session.username == null}"><a th:href="@{/login}"><span
-                                    class="flaticon-user"></span></a></li>
-                            <li th:if="${session.username != null}"><a th:href="@{/profile}"><span
-                                    class="flaticon-user"></span></a></li>
-                            <li th:if="${session.username == null}"><a th:href="@{/login}"><span
-                                    class="flaticon-shopping-cart"></span></a></li>
-                            <li th:if="${session.username != null}"><a th:href="@{/my-cart}"><span
-                                    class="flaticon-shopping-cart"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Mobile Menu -->
-                <div class="col-12">
-                    <div class="mobile_menu d-block d-lg-none"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header End -->
-</header>
-<main>
+	<!--? Preloader Start -->
+	<div id="preloader-active">
+		<div
+			class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="preloader-circle"></div>
+				<div class="preloader-img pere-text">
+					<img src="/client/assets/img/logo/logo.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="hero-cap text-center">
-        <h2 th:if="${session.username == null}" style="margin : 40px auto;">WELCOME TO OUR SHOP</h2>
-        <h2 th:if="${session.username != null}" th:text="'WELCOME BACK ' +  ${session.username}"
-            style="margin : 40px auto;"></h2>
-    </div>
+	<div th:insert="/client/fragment :: headerBox"></div>
 
-    <section class="cart_area" style="margin : 40px auto;" >
-        <div class="container">
-            <div class="cart_inner">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="cartItemDTO : ${cartItemDTOs}">
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img th:src="${cartItemDTO.productDTO.picture}" alt=""/>
-                                    </div>
-                                    <div class="media-body">
-                                        <p th:text="${cartItemDTO.productDTO.name}"></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5 th:text="${#numbers.formatDecimal(cartItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                    <input class="input-number" type="text" th:value="${cartItemDTO.quantity}" min="0" max="10">
-                                    <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                                </div>
-                            </td>
-                            <td>
-                                <h5 th:text="${#numbers.formatDecimal(cartItemDTO.quantity * cartItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
-                            </td>
-                        </tr>
+	<main>
 
-                        <tr class="bottom_button">
-                            <td>
-                                <a class="btn_1" href="#">Update Cart</a>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <div class="cupon_text float-right">
-                                    <a class="btn_1" href="#">Close Coupon</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h5>Subtotal</h5>
-                            </td>
-                            <td>
-                                <h5>$2160.00</h5>
-                            </td>
-                        </tr>
+		<div class="hero-cap text-center">
+			<h2  style="margin: 40px auto;">LIST PRODUCT IN YOUR CART</h2>
+		</div>
 
-                        </tbody>
-                    </table>
-                    <div class="checkout_btn_inner float-right">
-                        <a class="btn_1" th:href="@{/}">Continue Shopping</a>
-                        <a class="btn_1 checkout_btn_1" th:href="@{/checkout}">Proceed to checkout</a>
-                    </div>
-                </div>
-            </div>
-    </section>
+		<section class="cart_area" style="margin: 40px auto;">
+			<div class="container">
+				<div class="cart_inner">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Product</th>
+									<th scope="col">Price</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="cartItemDTO : ${cartItemDTOs}">
+									<td>
+										<div class="media">
+											<div class="d-flex">
+												<img th:src="${cartItemDTO.productDTO.picture}" alt="" />
+											</div>
+											<div class="media-body">
+												<p th:text="${cartItemDTO.productDTO.name}"></p>
+											</div>
+										</div>
+									</td>
+									<td>
+										<h5
+											th:text="${#numbers.formatDecimal(cartItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+									</td>
+									<td>
+										<form
+											th:action="@{/update-cart/{id}(id=${cartItemDTO.id})}"
+											method="post">
+
+											<input name="quantity" type="number" th:value="${cartItemDTO.quantity}"
+												min="0" max="100">
+											<button class="genric-btn success circle">Cập nhật</button>
+										</form>
+									</td>
+									<td>
+										<h5
+											th:text="${#numbers.formatDecimal(cartItemDTO.quantity * cartItemDTO.productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+									</td>
+								</tr>
+
+								
+								<tr>
+									<td></td>
+									<td></td>
+									<td>
+										<h5>Subtotal</h5>
+									</td>
+									<td>
+										<h5 th:text="${#numbers.formatDecimal(totalPriceOfCart, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+						<div class="checkout_btn_inner float-right">
+							<a class="btn_1" th:href="@{/}">Continue Shopping</a> <a
+								class="btn_1 checkout_btn_1" th:href="@{/checkout}">Proceed
+								to checkout</a>
+						</div>
+					</div>
+				</div>
+		</section>
 
 
-    <div class="shop-method-area">
-        <div class="container">
-            <div class="method-wrapper">
+		<div class="shop-method-area">
+			<div class="container">
+				<div class="method-wrapper"></div>
+			</div>
+		</div>
+		<!-- Shop Method End-->
+	</main>
 
-            </div>
-        </div>
-    </div>
-    <!-- Shop Method End-->
-</main>
-<footer>
-    <!-- Footer Start-->
-    <div class="footer-area footer-padding">
-        <div class="container">
-            <div class="row d-flex justify-content-between">
-                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                    <div class="single-footer-caption mb-50">
-                        <div class="single-footer-caption mb-30">
-                            <!-- logo -->
-                            <div class="footer-logo">
-                                <a href="index.html"><img
-                                        src="/client/assets/img/logo/logo2_footer.png" alt=""></a>
-                            </div>
-                            <div class="footer-tittle">
-                                <div class="footer-pera">
-                                    <p>Asorem ipsum adipolor sdit amet, consectetur
-                                        adipisicing elitcf sed do eiusmod tem.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
-                    <div class="single-footer-caption mb-50">
-                        <div class="footer-tittle">
-                            <h4>Quick Links</h4>
-                            <ul>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> Offers & Discounts</a></li>
-                                <li><a href="#"> Get Coupon</a></li>
-                                <li><a href="#"> Contact Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
-                    <div class="single-footer-caption mb-50">
-                        <div class="footer-tittle">
-                            <h4>New Products</h4>
-                            <ul>
-                                <li><a href="#">Woman Cloth</a></li>
-                                <li><a href="#">Fashion Accessories</a></li>
-                                <li><a href="#"> Man Accessories</a></li>
-                                <li><a href="#"> Rubber made Toys</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
-                    <div class="single-footer-caption mb-50">
-                        <div class="footer-tittle">
-                            <h4>Support</h4>
-                            <ul>
-                                <li><a href="#">Frequently Asked Questions</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Report a Payment Issue</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer bottom -->
-            <div class="row align-items-center">
-                <div class="col-xl-7 col-lg-8 col-md-7">
-                    <div class="footer-copy-right">
-                        <p>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                            All rights reserved | This template is made with <i
-                                class="fa fa-heart" aria-hidden="true"></i> by <a
-                                href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-4 col-md-5">
-                    <div class="footer-copy-right f-right">
-                        <!-- social -->
-                        <div class="footer-social">
-                            <a href="#"><i class="fab fa-twitter"></i></a> <a
-                                href="https://www.facebook.com/sai4ull"><i
-                                class="fab fa-facebook-f"></i></a> <a href="#"><i
-                                class="fab fa-behance"></i></a> <a href="#"><i
-                                class="fas fa-globe"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End-->
-</footer>
-<!--? Search model Begin -->
-<div class="search-model-box">
-    <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="search-close-btn">+</div>
-        <form class="search-model-form">
-            <input type="text" id="search-input"
-                   placeholder="Searching key.....">
-        </form>
-    </div>
-</div>
-<!-- Search model end -->
 
-<!-- JS here -->
-<!-- All JS Custom Plugins Link Here here -->
-<script src="/client/assets/js/vendor/modernizr-3.5.0.min.js"></script>
-<!-- Jquery, Popper, Bootstrap -->
-<script src="/client/assets/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="/client/assets/js/popper.min.js"></script>
-<script src="/client/assets/js/bootstrap.min.js"></script>
-<!-- Jquery Mobile Menu -->
-<script src="/client/assets/js/jquery.slicknav.min.js"></script>
+	<div th:insert="/client/fragment :: footerBox"></div>
 
-<!-- Jquery Slick , Owl-Carousel Plugins -->
-<script src="/client/assets/js/owl.carousel.min.js"></script>
-<script src="/client/assets/js/slick.min.js"></script>
+	<div th:insert="/client/fragment :: searchBox"></div>
 
-<!-- One Page, Animated-HeadLin -->
-<script src="/client/assets/js/wow.min.js"></script>
-<script src="/client/assets/js/animated.headline.js"></script>
-<script src="/client/assets/js/jquery.magnific-popup.js"></script>
+	<!-- JS here -->
+	<!-- All JS Custom Plugins Link Here here -->
+	<script src="/client/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+	<!-- Jquery, Popper, Bootstrap -->
+	<script src="/client/assets/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="/client/assets/js/popper.min.js"></script>
+	<script src="/client/assets/js/bootstrap.min.js"></script>
+	<!-- Jquery Mobile Menu -->
+	<script src="/client/assets/js/jquery.slicknav.min.js"></script>
 
-<!-- Scroll up, nice-select, sticky -->
-<script src="/client/assets/js/jquery.scrollUp.min.js"></script>
-<script src="/client/assets/js/jquery.nice-select.min.js"></script>
-<script src="/client/assets/js/jquery.sticky.js"></script>
+	<!-- Jquery Slick , Owl-Carousel Plugins -->
+	<script src="/client/assets/js/owl.carousel.min.js"></script>
+	<script src="/client/assets/js/slick.min.js"></script>
 
-<!-- contact js -->
-<script src="/client/assets/js/contact.js"></script>
-<script src="/client/assets/js/jquery.form.js"></script>
-<script src="/client/assets/js/jquery.validate.min.js"></script>
-<script src="/client/assets/js/mail-script.js"></script>
-<script src="/client/assets/js/jquery.ajaxchimp.min.js"></script>
+	<!-- One Page, Animated-HeadLin -->
+	<script src="/client/assets/js/wow.min.js"></script>
+	<script src="/client/assets/js/animated.headline.js"></script>
+	<script src="/client/assets/js/jquery.magnific-popup.js"></script>
 
-<!-- Jquery Plugins, main Jquery -->
-<script src="/client/assets/js/plugins.js"></script>
-<script src="/client/assets/js/main.js"></script>
+	<!-- Scroll up, nice-select, sticky -->
+	<script src="/client/assets/js/jquery.scrollUp.min.js"></script>
+	<script src="/client/assets/js/jquery.nice-select.min.js"></script>
+	<script src="/client/assets/js/jquery.sticky.js"></script>
+
+	<!-- contact js -->
+	<script src="/client/assets/js/contact.js"></script>
+	<script src="/client/assets/js/jquery.form.js"></script>
+	<script src="/client/assets/js/jquery.validate.min.js"></script>
+	<script src="/client/assets/js/mail-script.js"></script>
+	<script src="/client/assets/js/jquery.ajaxchimp.min.js"></script>
+
+	<!-- Jquery Plugins, main Jquery -->
+	<script src="/client/assets/js/plugins.js"></script>
+	<script src="/client/assets/js/main.js"></script>
 
 </body>
 </html>

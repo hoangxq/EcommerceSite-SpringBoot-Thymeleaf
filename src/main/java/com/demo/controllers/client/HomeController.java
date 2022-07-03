@@ -1,5 +1,6 @@
 package com.demo.controllers.client;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -39,20 +41,38 @@ public class HomeController {
 
 	@Autowired
 	private UserService userService;
-
+	
 	@GetMapping("")
-	public String home (Model model, HttpSession session) {
+	public String homeRedirect () {
+		return "redirect:/page/1";
+	}
+
+	@GetMapping("/page/{id}")
+	public String home (Model model, HttpSession session, 
+				@PathVariable("id") Integer id) {
 		
 		List<CategoryDTO> categoryDTOs = categoryService.getAllCategory()
 				.stream().map(e -> e.toDTO()).collect(Collectors.toList());
 
-		List<ProductDTO> productDTOS = productService.getAllProduct().stream()
-						.map(e -> e.toDTO()).collect(Collectors.toList());
-
-		Collections.shuffle(productDTOS);
+		List<ProductDTO> listAllProductDTO = productService.getAllProduct().stream()
+				.map(e -> e.toDTO()).collect(Collectors.toList()); 
 		
+		int pageNumber = listAllProductDTO.size()/8;
+		
+		List<List<ProductDTO>> listPage = new ArrayList<List<ProductDTO>>();
+		int index = 0;
+		
+		for (int i = 0; i < pageNumber; i++) {
+			List<ProductDTO> res = listAllProductDTO.subList(index, index + 8);
+			listPage.add(res);
+			index += 8;
+		}
+
+		Collections.shuffle(listPage.get(id - 1));
+		
+		model.addAttribute("pageNumbers", pageNumber);
 		model.addAttribute("categoryDTOs", categoryDTOs);
-		model.addAttribute("productDTOs", productDTOS);
+		model.addAttribute("productDTOs", listPage.get(id - 1));
 
 
 		return "/client/home";
@@ -119,6 +139,15 @@ public class HomeController {
 	public String registerPost (Model model, @ModelAttribute(name = "userDTO") UserDTO userDTO) {
 
 		userDTO.setRoleDTO((new Role(ERole.ROLE_USER)).toDTO());
+		
+		User user0 = userService.getUserByEmail(userDTO.getEmail());
+		User user1 = userService.getUserByUsername(userDTO.getUsername());
+		
+		if (user0 != null || user1 != null) {
+			model.addAttribute("error", "Email or username is existed in system");
+			return "/client/register";
+		}
+		
 		userService.createUser(userDTO.toModel());
 
 		return "redirect:/login";

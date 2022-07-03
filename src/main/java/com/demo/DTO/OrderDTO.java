@@ -24,9 +24,13 @@ public class OrderDTO {
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date timeOrder;
-
+	
+	private Double totalPrice;
+	
+	
 	public Order toModel () {
 		return new Order(id, userDTO.toModel(), receiverFullname, receiverAddress
-				, receiverPhone, timeOrder);
+				, receiverPhone, timeOrder, totalPrice);
 	}
+
 }

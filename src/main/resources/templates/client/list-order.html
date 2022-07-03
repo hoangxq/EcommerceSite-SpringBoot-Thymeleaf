@@ -11,6 +11,11 @@
 	href="/client/assets/img/favicon.ico">
 
 <!-- CSS here -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <link rel="stylesheet" href="/client/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/client/assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/client/assets/css/flaticon.css">
@@ -41,69 +46,62 @@
 	<div th:insert="/client/fragment :: headerBox"></div>
 
 	<main>
-		<section class="popular-items">
-			<div th:if="${categoryDTO == null}" class="hero-cap text-center">
-				<h2 th:if="${session.username == null}" style="margin: 40px auto;">WELCOME
-					TO OUR SHOP</h2>
-				<h2 th:if="${session.username != null}"
-					th:text="'WELCOME BACK ' +  ${session.username}"
-					style="margin: 40px auto;"></h2>
-			</div>
-			<div th:if="${categoryDTO != null}" class="hero-cap text-center" style="margin: 40px auto;">
-				<h2 th:text="'List Product of ' + ${categoryDTO.name}"></h2>
-			</div>
+
+		<div class="hero-cap text-center">
+			<h2 style="margin: 40px auto;">LIST ORDER OF YOU</h2>
+		</div>
+
+		<section class="cart_area" style="margin: 40px auto;">
 			<div class="container">
-				<nav class="blog-pagination justify-content-center d-flex mb-40">
-					<ul  th:if="${pageNumbers != null}" class="pagination">
-						<li th:each="page : ${#numbers.sequence(1, pageNumbers)}" class="page-item"><a th:href="@{/page/{id}(id=${page})}" 
-						class="page-link" th:text="${page}"> <i class="ti-angle-left"></i>
-						</a></li>
-					</ul>
-				</nav>
-				<!-- Nav Card -->
-				<div class="tab-content" id="nav-tabContent">
-					<!-- card one -->
-					<div class="tab-pane fade show active" id="nav-home"
-						role="tabpanel" aria-labelledby="nav-home-tab">
-						<div class="row">
-							<div th:each="productDTO : ${productDTOs}"
-								class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-								<div class="single-popular-items mb-50 text-center">
-									<div class="popular-img">
-										<img th:src="${productDTO.picture}" alt=""> <a
-											th:if="${session.username == null}" th:href="@{/login}">
-											<div class="img-cap">
-												<span>Add to cart</span>
-											</div>
-										</a> <a th:if="${session.username != null}" th:href="@{/add-to-cart(id=${productDTO.id}, quantity=1)}">
-											<div class="img-cap">
-												<span>Add to cart</span>
-											</div>
-										</a>
-										<div class="favorit-items">
-											<span class="flaticon-heart"></span>
-										</div>
-									</div>
-									<div class="popular-caption">
-										<h3>
-											<a th:href="@{/product-detail/{id}(id=${productDTO.id})}"
-												th:text="${productDTO.name}"></a>
-										</h3>
-										<span
-											th:text="${#numbers.formatDecimal(productDTO.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></span>
-									</div>
-								</div>
-							</div>
+				<div class="cart_inner">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Receiver Name</th>
+									<th scope="col">Address</th>
+									<th scope="col">Time order</th>
+									<th scope="col">Phone number</th>
+									<th scope="col">Total Price</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="orderDTO : ${orderDTOs}">
+									<td>
+										<h5 th:text="${orderDTO.id}"></h5>
+									</td>
+									<td>
+										<h5 th:text="${orderDTO.receiverFullname}"></h5>
+									</td>
+									<td>
+										<h5 th:text="${orderDTO.receiverAddress}"></h5>
+									</td>
+									<td>
+										<h5 th:text="${orderDTO.timeOrder}"></h5>
+									</td>
+									<td>
+										<h5 th:text="${orderDTO.receiverPhone}"></h5>
+									</td>
+									<td>
+										<h5 th:text="${#numbers.formatDecimal(orderDTO.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></h5>
+									</td>
+									<td>
+										<a class="genric-btn circle medium info" th:href="@{/my-order/detail/{id}(id=${orderDTO.id})}">List Product</a> 
+									</td>
+								</tr>
 
-						</div>
+								
+
+							</tbody>
+						</table>
 					</div>
-
 				</div>
-				<!-- End Nav Card -->
 			</div>
 		</section>
-		<!-- Latest Products End -->
-		<!--? Shop Method Start-->
+
+
 		<div class="shop-method-area">
 			<div class="container">
 				<div class="method-wrapper"></div>
@@ -111,6 +109,7 @@
 		</div>
 		<!-- Shop Method End-->
 	</main>
+
 
 	<div th:insert="/client/fragment :: footerBox"></div>
 

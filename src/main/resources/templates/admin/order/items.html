@@ -48,21 +48,20 @@
 		<div th:insert="/admin/fragment/sidebar :: navbar"></div>
 
 		<aside th:insert="/admin/fragment/sidebar :: sidebar"></aside>
-		
-		
+
 		<div class="content-wrapper">
 			<section class="content">
 				<div class="content-header">
 					<div class="container-fluid">
 						<div class="row mb-2">
 							<div class="col-sm-6">
-								<h1 class="m-0">Carts</h1>
+								<h1 class="m-0">Items of order</h1>
 							</div>
 							<!-- /.col -->
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-right">
 									<li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
-									<li class="breadcrumb-item active">Carts</li>
+									<li class="breadcrumb-item active">Items of order</li>
 								</ol>
 							</div>
 							<!-- /.col -->
@@ -71,40 +70,50 @@
 					</div>
 					<!-- /.container-fluid -->
 				</div>
+				<section class="content"></section>
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">List All Cart</h3>
-							</div>
-							<!-- /.card-header -->
-							<div class="card-body table-responsive p-0">
-								<table class="table table-hover text-nowrap table-bordered">
-									<thead>
-										<tr>
-											<th>ID</th>
-											<th>User's</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="cartDTO : ${cartDTOs}">
-											<td th:text="${cartDTO.id}"></td>
-											<td th:text="${cartDTO.userDTO.username}"></td>
-											<td><a
-												th:href="@{/admin/carts/cart-item/{id}(id=${cartDTO.id})}"
-												class="btn btn-success">List product</a> 
-											</td>
-										</tr>
 
-									</tbody>
-								</table>
+							<div class="card card-info">
+								
+								<div class="card-header">
+									<h3 class="card-title"
+										th:text="'List all product in ' + ${orderDTO.userDTO.username} + '\'s order'"></h3>
+
+								</div>
+								<!-- /.card-header -->
+								<div class="card-body table-responsive p-0">
+									<table class="table table-bordered table-hover text-nowrap">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Name</th>
+												<th>Picture</th>
+												<th>Category</th>
+												<th>Quantity</th>
+												<th>Total Price</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="orderItemDTO : ${orderItemDTOs}">
+												<td th:text="${orderItemDTO.id}"></td>
+												<td th:text="${orderItemDTO.productDTO.name}"></td>
+												<td><img th:src="${orderItemDTO.productDTO.picture}" style="width: 140px; height: 140px"/></td>
+												<td th:text="${orderItemDTO.productDTO.categoryDTO.name}"></td>
+												<td th:text="${orderItemDTO.quantity}"></td>
+												<td
+													th:text="${#numbers.formatDecimal(orderItemDTO.productDTO.price * orderItemDTO.quantity, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+								<!-- /.card-body -->
 							</div>
-							<!-- /.card-body -->
+							<!-- /.card -->
 						</div>
-						<!-- /.card -->
 					</div>
-				</div>
 			</section>
 		</div>
 		

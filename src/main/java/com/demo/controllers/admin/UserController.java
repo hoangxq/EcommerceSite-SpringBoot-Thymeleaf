@@ -55,6 +55,14 @@ public class UserController {
 	@PostMapping("/add-user")
 	public String addNewUserPost(Model model, @ModelAttribute(name = "userDTO") UserDTO userDTO) {
 
+		User user0 = userService.getUserByUsername(userDTO.getUsername());
+		User user1 = userService.getUserByEmail(userDTO.getEmail());
+		
+		if (user0 != null || user1 != null) {
+			model.addAttribute("error", "Username or Email is existed in System");
+			return "/admin/user/add-user";
+		}
+		
 		userService.createUser(userDTO.toModel());
 		
 		return "redirect:/admin/users";
@@ -73,6 +81,15 @@ public class UserController {
 	@PostMapping("/edit-user/{id}")
 	public String editUserPost(Model model, @ModelAttribute(name = "userDTO") UserDTO userDTO,
 			@PathVariable(name = "id") Long id) {
+		
+		User user0 = userService.getUserByUsername(userDTO.getUsername());
+		User user1 = userService.getUserByEmail(userDTO.getEmail());
+		
+		if (user0 != null || user1 != null) {
+			model.addAttribute("error", "Username or Email is existed in System");
+			return "/admin/user/edit-user";
+		}
+		
 		
 		userDTO.setPassword(userService.getUserById(id).getPassword());
 		
